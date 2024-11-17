@@ -198,6 +198,8 @@ export const deleteDogs = async (id: string, deleteBoth: boolean) => {
       id,
     },
   });
+  revalidatePath("/admin/available");
+  revalidatePath("/available-dogs");
 
   const checking = await prisma.dogsGenerally.findUnique({
     where: {
@@ -214,8 +216,6 @@ export const deleteDogs = async (id: string, deleteBoth: boolean) => {
     revalidatePath("/admin/alldogs");
     revalidatePath("/dogs");
   }
-  revalidatePath("/admin/available");
-  revalidatePath("/availabe-dogs");
 };
 
 export const DeleteFromDogs = async (id: string) => {
@@ -245,6 +245,7 @@ export const BookReservation = async (
   });
   revalidatePath("/reservation");
   revalidatePath("/available-dogs");
+  revalidatePath("/admin/reservation");
   return redirect("/available-dogs");
 };
 
@@ -255,7 +256,7 @@ export const deleteReserve = async (id: string) => {
     },
   });
   revalidatePath("/admin/reservation");
-  revalidatePath("/available-dogs");
+  revalidatePath("/reservation");
 
   return true;
 };
@@ -267,7 +268,6 @@ export const myFavourite = async (
   favourite: boolean
 ) => {
   if (dogsGenerallyId && userId) {
-    console.log(dogsGenerallyId, myFavid, userId, favourite);
     if (favourite === false) {
       await prisma.favourite.create({
         data: {
@@ -277,6 +277,7 @@ export const myFavourite = async (
       });
       revalidatePath("/favourite");
       revalidatePath("/dogs");
+      revalidatePath("/admin/favourite");
     }
 
     if (favourite === true) {
@@ -316,6 +317,7 @@ export const Subscriber = async (email: string) => {
         email,
       },
     });
+    revalidatePath("/admin/subscribe");
     return true;
   }
 };

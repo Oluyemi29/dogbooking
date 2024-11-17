@@ -9,8 +9,6 @@ type IdProps = {
 };
 
 const page = async ({ params: { id } }: IdProps) => {
-  console.log(id);
-
   const data = await prisma.availableDogs.findUnique({
     where: {
       id,

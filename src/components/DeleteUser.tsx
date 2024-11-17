@@ -41,6 +41,7 @@ const DeleteUser = ({ id, name, email }: userProps) => {
         isOpen={openIt}
         isDismissable={false}
         isKeyboardDismissDisabled={true}
+        className="text-black"
       >
         <ModalContent>
           <>

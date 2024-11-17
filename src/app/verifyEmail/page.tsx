@@ -6,7 +6,7 @@ const Page = () => {
   const Anime =
     "https://i.pinimg.com/originals/80/b4/c8/80b4c8eca5291255732a9d4e3eeb8826.gif";
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center">
+    <div className="w-full h-screen text-black flex flex-col justify-center items-center">
       <div className="md:w-3/6 w-full">
         <Image
           src={Anime}

@@ -21,7 +21,7 @@ const DeleteFromAllDogs = ({ id, name }: userProps) => {
   const confirmDelete = async () => {
     setOpenIt(false);
     await DeleteFromDogs(id);
-  }
+  };
 
   return (
     <>
@@ -40,6 +40,7 @@ const DeleteFromAllDogs = ({ id, name }: userProps) => {
         isOpen={openIt}
         isDismissable={false}
         isKeyboardDismissDisabled={true}
+        className="text-black"
       >
         <ModalContent>
           <>

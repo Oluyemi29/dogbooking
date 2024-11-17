@@ -6,7 +6,7 @@ import {
   ModalBody,
   ModalContent,
   ModalFooter,
-  ModalHeader
+  ModalHeader,
 } from "@nextui-org/react";
 import React, { useState } from "react";
 
@@ -41,6 +41,7 @@ const DeleteReservation = ({ id, name, breed }: userProps) => {
         isOpen={openIt}
         isDismissable={false}
         isKeyboardDismissDisabled={true}
+        className="text-black"
       >
         <ModalContent>
           <>

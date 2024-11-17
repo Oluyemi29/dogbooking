@@ -22,7 +22,7 @@ const page = async ({ params }: paramsProps) => {
   }
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex justify-center text-black items-center">
       <div className="md:w-2/4 text-center w-full">
         <Image
           src={EmailAnime}

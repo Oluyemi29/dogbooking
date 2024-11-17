@@ -43,6 +43,7 @@ const DeleteDog = ({ id, name }: userProps) => {
         isOpen={openIt}
         isDismissable={false}
         isKeyboardDismissDisabled={true}
+        className="text-black"
       >
         <ModalContent>
           <>
