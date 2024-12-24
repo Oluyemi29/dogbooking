@@ -103,8 +103,8 @@ const ReservationCard = ({ Reserve }: AvailableProps) => {
       ) : (
         <>
           <IsEmpty
-            EmptyHeading="No Favourite Found"
-            EmptyParagraph="Kindly go to homepage and like your favourite dogs"
+            EmptyHeading="No Reservation Found"
+            EmptyParagraph="Kindly go to homepage and like your reseration dogs"
           />
         </>
       )}

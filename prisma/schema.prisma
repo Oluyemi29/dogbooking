@@ -1,7 +1,6 @@
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -9,7 +8,7 @@ generator client {
 }
 
 model User {
-  id            String        @id @default(cuid())
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String        @unique
   password      String?
@@ -28,7 +27,8 @@ model User {
 }
 
 model Account {
-  userId            String
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
   type              String
   provider          String
   providerAccountId String
@@ -45,29 +45,31 @@ model Account {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@id([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
+  @@map("Account")
 }
 
 model Session {
-  sessionToken String   @unique
-  userId       String
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique @db.String
+  userId       String   @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@map("Session")
 }
 
 model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String
   expires    DateTime
 
-  @@id([identifier, token])
+  @@unique([identifier, token])
 }
 
 model AvailableDogs {
-  id        String        @id @default(cuid())
+  id        String        @id @default(auto()) @map("_id") @db.ObjectId
   name      String
   breed     String
   age       String
@@ -82,7 +84,7 @@ model AvailableDogs {
 }
 
 model DogsGenerally {
-  id          String      @id @default(cuid())
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   breed       String
   age         String
@@ -98,29 +100,29 @@ model DogsGenerally {
 }
 
 model Reservation {
-  id              String         @id @default(cuid())
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
   User            User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId          String?
+  userId          String?        @db.ObjectId
   startDate       DateTime
   endDate         DateTime
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   AvailableDogs   AvailableDogs? @relation(fields: [availableDogsId], references: [id], onDelete: Cascade)
-  availableDogsId String?
+  availableDogsId String?        @db.ObjectId
 }
 
 model Favourite {
-  id              String         @id @default(cuid())
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
   DogsGenerally   DogsGenerally? @relation(fields: [dogsGenerallyId], references: [id], onDelete: Cascade)
-  dogsGenerallyId String?
+  dogsGenerallyId String?        @db.ObjectId
   User            User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId          String?
+  userId          String?        @db.ObjectId
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 }
 
 model Subscribe {
-  id        String   @id @default(cuid())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   email     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
