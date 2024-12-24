@@ -38,7 +38,6 @@ const authOptions = {
           user.password as string
         );
         if (!checkPassword) {
-          console.log("incorrect password");
           return null;
         }
         return user;

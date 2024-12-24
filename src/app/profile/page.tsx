@@ -1,9 +1,11 @@
 import ProfileCard from "@/components/ProfileCard";
 import prisma from "@/lib/db";
 import { getServerSession } from "next-auth";
+import { unstable_noStore as noStore } from "next/cache";
 import React from "react";
 
 const page = async () => {
+  noStore();
   const serverSess = await getServerSession();
   const emails = serverSess?.user?.email;
 

@@ -5,7 +5,7 @@ import nodemailer from "nodemailer";
 import bycrpt from "bcrypt";
 import Handlebars from "handlebars";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore as noStore } from "next/cache";
 
 export const createAccount = async (
   address: string,
@@ -15,6 +15,7 @@ export const createAccount = async (
   pictureLink: string,
   phone: string
 ) => {
+  noStore();
   const User = await prisma.user.findUnique({
     where: {
       email,
@@ -66,15 +67,13 @@ export const createAccount = async (
 };
 
 export const emailVerify = async (id: string) => {
-  console.log(id);
-
+  noStore();
   const user = await prisma.user.findUnique({
     where: {
       id,
     },
   });
   if (!user) {
-    console.log("id not found");
     return null;
   }
   await prisma.user.update({
@@ -93,7 +92,6 @@ export const editProfile = async (
   editInput: string,
   id: string
 ) => {
-  // console.log(editWhat, editInput, id);
   if (editWhat === "name") {
     await prisma.user.update({
       where: {
@@ -130,7 +128,6 @@ export const editProfile = async (
 };
 
 export const deleteUser = async (id: string) => {
-  console.log(id);
   await prisma.user.delete({
     where: {
       id,
@@ -193,6 +190,7 @@ export const uploadDogs = async (
 };
 
 export const deleteDogs = async (id: string, deleteBoth: boolean) => {
+  noStore();
   await prisma.availableDogs.delete({
     where: {
       id,
@@ -293,7 +291,6 @@ export const myFavourite = async (
 };
 
 export const resDelete = async (id: string) => {
-  console.log(id);
   await prisma.reservation.delete({
     where: {
       id,
@@ -304,6 +301,7 @@ export const resDelete = async (id: string) => {
 };
 
 export const Subscriber = async (email: string) => {
+  noStore();
   const checkEmail = await prisma.subscribe.findUnique({
     where: {
       email,

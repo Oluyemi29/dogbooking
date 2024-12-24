@@ -1,5 +1,6 @@
 import AvailableDogReview from "@/components/AvailableDogReview";
 import prisma from "@/lib/db";
+import { unstable_noStore as noStore } from "next/cache";
 import React from "react";
 
 type IdProps = {
@@ -9,6 +10,7 @@ type IdProps = {
 };
 
 const page = async ({ params: { id } }: IdProps) => {
+  noStore();
   const data = await prisma.availableDogs.findUnique({
     where: {
       id,

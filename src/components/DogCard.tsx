@@ -32,7 +32,6 @@ const DogCard = ({ price, link, dogsGenerallyId, fav }: priceProps) => {
 
   const handleFavourite = async () => {
     await myFavourite(dogsGenerallyId, myFavid, userId, favourite);
-    console.log(favourite);
   };
   return (
     <Card

@@ -98,7 +98,6 @@ const AdminUploadDog = () => {
     const { name, age, breed, color, gender, size, price } = value;
 
     try {
-      console.log(name, age, breed, color, gender, size, price);
 
       const ImageDetails = new FormData();
       ImageDetails.append("file", value.image);

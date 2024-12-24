@@ -8,7 +8,6 @@ const middleware = async (request: NextRequest) => {
   });
   const { pathname } = request.nextUrl;
   if (pathname.startsWith("/admin")) {
-    // console.log(token?.user.confirmEmail);
     if (!token || token.email !== "admin@gmail.com") {
       return NextResponse.redirect(new URL("/", request.url));
     }
